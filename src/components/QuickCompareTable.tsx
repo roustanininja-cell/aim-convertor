@@ -121,7 +121,7 @@ export const QuickCompareTable: React.FC<QuickCompareTableProps> = ({
 
                 let formattedSens: string;
                 if (game.calculationType === 'minecraft_cubic') {
-                  formattedSens = `${(targetSens * 100).toFixed(0)}% (s: ${targetSens.toFixed(3)})`;
+                  formattedSens = `${(targetSens * 200).toFixed(0)}% (s: ${targetSens.toFixed(3)})`;
                 } else if (game.sensPrecision === 0) {
                   formattedSens = Math.round(targetSens).toString();
                 } else {

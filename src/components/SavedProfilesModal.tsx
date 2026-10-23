@@ -53,7 +53,7 @@ export const SavedProfilesModal: React.FC<SavedProfilesModalProps> = ({
         if (Array.isArray(parsed)) {
           onImportProfiles(parsed);
         }
-      } catch (err) {
+      } catch {
         alert('Invalid JSON file format.');
       }
     };

@@ -83,7 +83,7 @@ export function calculateTargetSensitivity(
 ): number {
   if (sourceSens <= 0 || sourceDpi <= 0 || targetDpi <= 0) return 0;
 
-  const sourceCm360 = calculateCm360(sourceGame, sourceSens, sourceDpi);
+  const sourceCm360 = calculateCm360(sourceGame, sourceSens, sourceDpi, tarkovPenaltyPercent);
   if (sourceCm360 <= 0) return 0;
 
   // If target game is Minecraft Java (cubic inversion)
@@ -160,7 +160,7 @@ export function convertSensitivity(
   targetDpi: number = sourceDpi,
   tarkovPenaltyPercent = 0
 ): ConversionResult {
-  const sourceCm360 = calculateCm360(sourceGame, sourceSens, sourceDpi);
+  const sourceCm360 = calculateCm360(sourceGame, sourceSens, sourceDpi, tarkovPenaltyPercent);
   const targetSens = calculateTargetSensitivity(
     sourceGame,
     targetGame,
@@ -177,7 +177,7 @@ export function convertSensitivity(
   // Formatted string according to precision rules
   let formattedTargetSens: string;
   if (targetGame.calculationType === 'minecraft_cubic') {
-    formattedTargetSens = `${(targetSens * 100).toFixed(0)}% (slider: ${targetSens.toFixed(3)})`;
+    formattedTargetSens = `${(targetSens * 200).toFixed(0)}% (slider: ${targetSens.toFixed(3)})`;
   } else if (targetGame.sensPrecision === 0) {
     formattedTargetSens = Math.round(targetSens).toString();
   } else {

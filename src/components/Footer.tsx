@@ -2,6 +2,8 @@ import React from 'react';
 import { Crosshair, ShieldCheck } from 'lucide-react';
 
 export const Footer: React.FC = () => {
+  const [currentYear] = React.useState(() => new Date().getFullYear());
+
   return (
     <footer style={{
       borderTop: '1px solid var(--border-subtle)',
@@ -97,7 +99,7 @@ export const Footer: React.FC = () => {
           color: 'var(--text-muted)',
         }}>
           <div>
-            © {new Date().getFullYear()} SensForge. All game trademarks belong to their respective publishers.
+            © {currentYear} SensForge. All game trademarks belong to their respective publishers.
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
             Built for competitive gamers with precision mathematics.

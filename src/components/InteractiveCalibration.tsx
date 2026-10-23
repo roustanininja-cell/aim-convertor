@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Crosshair, Play, RotateCcw, Award, Sparkles } from 'lucide-react';
 import type { GameDefinition } from '../data/games';
 import { GAMES_DATABASE } from '../data/games';
@@ -26,15 +26,6 @@ export const InteractiveCalibration: React.FC<InteractiveCalibrationProps> = ({
   const [baseSensInput, setBaseSensInput] = useState<number>(initialSens);
   const [dpiInput, setDpiInput] = useState<number>(initialDpi);
   const [psaState, setPsaState] = useState<PsaState | null>(null);
-
-  useEffect(() => {
-    if (initialSens && initialSens !== baseSensInput) {
-      setBaseSensInput(initialSens);
-    }
-    if (initialGame && initialGame.id !== selectedGame.id) {
-      setSelectedGame(initialGame);
-    }
-  }, [initialSens, initialGame]);
 
   const handleStartPsa = () => {
     setPsaState(initializePsa(baseSensInput, 5));
@@ -77,17 +68,7 @@ export const InteractiveCalibration: React.FC<InteractiveCalibrationProps> = ({
     return () => clearInterval(timer);
   }, [gameActive]);
 
-  const spawnTarget = () => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const r = 24;
-    const x = r + Math.random() * (canvas.width - 2 * r);
-    const y = r + Math.random() * (canvas.height - 2 * r);
-    targetRef.current = { x, y, r, spawnTime: performance.now() };
-    draw();
-  };
-
-  const draw = () => {
+  const draw = useCallback(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
@@ -139,7 +120,17 @@ export const InteractiveCalibration: React.FC<InteractiveCalibrationProps> = ({
     ctx.moveTo(x, y - 6);
     ctx.lineTo(x, y + 6);
     ctx.stroke();
-  };
+  }, []);
+
+  const handleSpawnTarget = useCallback(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const r = 24;
+    const x = r + Math.random() * (canvas.width - 2 * r);
+    const y = r + Math.random() * (canvas.height - 2 * r);
+    targetRef.current = { x, y, r, spawnTime: performance.now() };
+    draw();
+  }, [draw]);
 
   const handleCanvasClick = (e: React.MouseEvent<HTMLCanvasElement>) => {
     if (!gameActive) return;
@@ -161,7 +152,7 @@ export const InteractiveCalibration: React.FC<InteractiveCalibrationProps> = ({
       const elapsed = performance.now() - targetRef.current.spawnTime;
       setReactionTimes((prev) => [...prev, elapsed]);
       setScore((s) => s + 1);
-      spawnTarget();
+      handleSpawnTarget();
     } else {
       // Miss
       setMisses((m) => m + 1);
@@ -174,7 +165,7 @@ export const InteractiveCalibration: React.FC<InteractiveCalibrationProps> = ({
     setReactionTimes([]);
     setTimeLeft(30);
     setGameActive(true);
-    setTimeout(() => spawnTarget(), 100);
+    setTimeout(() => handleSpawnTarget(), 100);
   };
 
   const avgReactionMs = reactionTimes.length > 0

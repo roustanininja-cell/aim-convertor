@@ -48,18 +48,18 @@ SensForge is a high-precision, client-side mouse sensitivity converter, cross-ga
 | **Call of Duty: Warzone** | IW 9.0 | `0.0066°` | `options.3.cod24.cst` | ✅ Verified Exact |
 | **Call of Duty: Black Ops (BO6 / CW)** | IW 9.0 / Treyarch | `0.0066°` | In-game sensitivity | ✅ Verified Exact |
 | **Marvel Rivals** | Unreal Engine 5 | `0.0066°` | `GameUserSettings.ini` | ✅ Verified Exact |
-| **PUBG: Battlegrounds** | Unreal Engine 4 | `0.022°` | `LastConvertedMouseSensitivity` | ✅ Verified Exact |
+| **PUBG: Battlegrounds** | Unreal Engine 4 | `0.022°` | `LastConvertedMouseSensitivity` | ⚠️ Approximate / community-sourced |
 | **Team Fortress 2** | Source Engine | `0.022°` | `sensitivity "<value>"` | ✅ Verified Exact |
 | **Quake (Champions / Live)** | id Tech / Saber | `0.022°` | `m_yaw 0.022; sensitivity` | ✅ Verified Exact |
 | **Destiny 2** | Tiger Engine | `0.0066°` | `cvars.xml` (`mouse_look_sensitivity`) | ✅ Verified Exact |
-| **Battlefield 2042 / V / 1** | Frostbite | `0.0718°` | `GstInput.MouseSensitivity` | ✅ Verified |
-| **Battlefield 6 (Next-Gen Profile)** | Frostbite Next | `0.0718°` | `GstInput.MouseSensitivity` | ✅ Forward Compatible |
-| **Escape from Tarkov** | Unity Engine | `0.022°` (Base) | `Control.ini` (`mouseSensitivity`) | ✅ Gear Penalty Aware |
-| **Rust** | Unity Engine | `0.1125°` | `input.sensitivity <value>` | ✅ Verified Exact |
+| **Battlefield 2042 / V / 1** | Frostbite | `0.0718°` | `GstInput.MouseSensitivity` | ⚠️ Approximate / community-sourced |
+| **Battlefield 6 (Next-Gen Profile)** | Frostbite Next | `0.0718°` | `GstInput.MouseSensitivity` | ⚠️ Approximate / community-sourced |
+| **Escape from Tarkov** | Unity Engine | `0.022°` (Base) | `Control.ini` (`mouseSensitivity`) | ⚠️ Approximate / community-sourced |
+| **Rust** | Unity Engine | `0.1125°` | `input.sensitivity <value>` | ⚠️ Approximate / community-sourced |
 | **Minecraft (Java Edition)** | Java Proprietary | Non-linear Cubic | `options.txt` (`mouseSensitivity`) | ✅ Cubic Solved |
-| **Roblox** | Roblox Proprietary | `0.39783°` | Camera Sensitivity slider | ✅ Verified |
-| **Grand Theft Auto V** | RAGE | `0.055°` (Raw Input 1st) | `settings.xml` | ⚠️ Calibrated Approx. |
-| **Red Dead Redemption 2** | RAGE | `0.055°` (Raw Input 1st) | `system.xml` | ⚠️ Calibrated Approx. |
+| **Roblox** | Roblox Proprietary | `0.39783°` | Camera Sensitivity slider | ⚠️ Approximate / community-sourced |
+| **Grand Theft Auto V** | RAGE | `0.055°` (Raw Input 1st) | `settings.xml` | ⚠️ Approximate / community-sourced |
+| **Red Dead Redemption 2** | RAGE | `0.055°` (Raw Input 1st) | `system.xml` | ⚠️ Approximate / community-sourced |
 | **Cyberpunk 2077** | REDengine 4 | `0.022°` | `UserSettings.json` | ✅ Verified |
 | **DOOM Eternal** | id Tech 7 | `0.022°` | `doom_config.local` | ✅ Verified Exact |
 | **The Finals** | Unreal Engine 5 | `0.0066°` | `AppSettings.json` | ✅ Verified Exact |

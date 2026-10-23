@@ -64,6 +64,7 @@ export function App() {
   const [currentSens, setCurrentSens] = useState(0.35);
   const [currentDpi, setCurrentDpi] = useState(800);
   const [converterKey, setConverterKey] = useState(0);
+  const [psaKey, setPsaKey] = useState(0);
 
   // PSA calibration input state
   const [psaGame, setPsaGame] = useState<GameDefinition>(GAMES_DATABASE[0]);
@@ -103,6 +104,13 @@ export function App() {
     setCurrentSens(prof.sensitivity);
     setCurrentDpi(prof.dpi);
     setConverterKey((k) => k + 1);
+    const g = GAMES_DATABASE.find((item) => item.id === prof.gameId);
+    if (g) {
+      setPsaGame(g);
+      setPsaSens(prof.sensitivity);
+      setPsaDpi(prof.dpi);
+      setPsaKey((k) => k + 1);
+    }
     scrollTo('converter');
   };
 
@@ -124,6 +132,7 @@ export function App() {
     setPsaGame(game);
     setPsaSens(Number(sens.toFixed(game.sensPrecision)));
     setPsaDpi(dpi);
+    setPsaKey((k) => k + 1);
     scrollTo('calibration');
   };
 
@@ -179,6 +188,7 @@ export function App() {
 
         {/* 5. Aim Calibration & Mini-Benchmark */}
         <InteractiveCalibration
+          key={psaKey}
           initialGame={psaGame}
           initialSens={psaSens}
           initialDpi={psaDpi}

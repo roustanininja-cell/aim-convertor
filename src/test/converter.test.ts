@@ -97,6 +97,24 @@ describe('Sensitivity Converter Math Engine', () => {
     expect(penalizedCm).toBeCloseTo(baseCm / 0.8, 2);
   });
 
+  it('keeps cm/360 equal between source and target when Tarkov is the source with gear penalty', () => {
+    const penalty = 20; // 20% penalty
+    const result = convertSensitivity(tarkov, cs2, 0.5, 800, 800, penalty);
+    expect(result.sourceCm360).toBeGreaterThan(0);
+    expect(result.targetCm360).toBeCloseTo(result.sourceCm360, 3);
+  });
+
+  it('correctly formats Minecraft percentage where 0.5 equals 100%', () => {
+    // When target is Minecraft with slider 0.5
+    const resultSelf = convertSensitivity(minecraft, minecraft, 0.5, 800, 800);
+    expect(resultSelf.formattedTargetSens).toContain('100%');
+
+    // Valorant 0.35 @ 800 DPI -> Minecraft
+    const valResult = convertSensitivity(valorant, minecraft, 0.35, 800, 800);
+    expect(valResult.targetSens).toBeCloseTo(0.122, 3);
+    expect(valResult.formattedTargetSens).toContain('24%');
+  });
+
   it('calculates DPI shifts accurately', () => {
     const shift = calculateDpiShift(0.8, 400, 800);
     expect(shift.newSens).toBe(0.4);
